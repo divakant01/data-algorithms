@@ -7,7 +7,9 @@ import org.apache.spark.rdd.RDD
   * Created by Divakant Pandey on 5/28/17.
   */
 
-case class Tup(url: String, hitCount: Int)
+case class Tup(url: String, hitCount: Int) {
+  override def toString = (hitCount, url).toString()
+}
 
 /**
   * Implicit Ordering created for Tuples, Similar to Comparator in Java
@@ -22,6 +24,7 @@ object Tup {
   val orderByUrl = Ordering.by { x: Tup =>
     x.url
   }
+
 }
 
 object TopNForNonUniqueKeysUsingTakeOrdered {
@@ -44,10 +47,13 @@ object TopNForNonUniqueKeysUsingTakeOrdered {
     val pairs = rdd.map(x => {
       val t = x.split(",")
       (t(0), t(1).toInt)
-    }).reduceByKey(_ + _).map(f => (f._2, f._1))
+    }).reduceByKey(_ + _).map(f => new Tup(f._1, f._2))
 
 
-    val finalTopN = pairs.takeOrdered(10)
+    //val finalTopN = pairs.top(10)
+
+    //Order by Hit
+    val finalTopN = pairs.takeOrdered(10)(Tup.orderByHit.reverse)
 
     finalTopN.foreach(println)
   }
