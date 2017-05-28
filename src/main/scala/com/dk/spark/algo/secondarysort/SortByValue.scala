@@ -1,4 +1,4 @@
-package com.dk.spark.algo
+package com.dk.spark.algo.secondarysort
 
 import com.dk.spark.context.SparkContextManager
 
