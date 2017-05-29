@@ -4,7 +4,7 @@ import com.dk.spark.context.SparkContextManager
 import org.apache.spark.rdd.RDD
 
 /**
-  * Created by rock on 5/29/17.
+  * Created by Divakant Pandey on 5/29/17.
   */
 object TopNByKeys {
   val N = 2
