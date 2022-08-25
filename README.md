@@ -7,3 +7,4 @@ Algorithms
 4. Top N By takeOrdered (Implicit Ordering)
 5. TopN values by Keys
 6. TopNth value by Keys
+7.
